@@ -1,36 +1,45 @@
 import tkinter as tk
 import sqlite3 as sql
 
+# Connects to db.
 con = sql.connect("movie_ratings.db")
 cur = con.cursor()
 
+# Functions.
 def submit_action(event=None):
+    '''Get input for name, year, and rating in 3 main entry boxes'''
     movie_name = name_entry.get()
     movie_year = year_entry.get()
     movie_rating = rating_entry.get()
     update_db(movie_name, movie_year, movie_rating)
 
 def update_db(name, year, rating):
+    '''When user presses submit the info is pushed to the db'''
     cur.execute("INSERT INTO movie VALUES (?, ?, ?)", (name, year, rating))
     con.commit()
 
 def clear_entries():
+    '''When clear is pressed all entry boxes are cleared'''
     name_entry.delete(0, tk.END)
     year_entry.delete(0, tk.END)
     rating_entry.delete(0, tk.END)
     deleted_movie_entry.delete(0, tk.END)
 
 def close_program():
+    '''When End button is pressed program closes'''
     root.destroy()
 
 def view_db():
+    '''When view button is pressed, the console displays the db info in a neat format'''
     for row in cur.execute("SELECT * FROM movie"):
         print(f"{row[0]} | {row[1]} | {row[2]}")
 
 def delete_column(event=None):
+    '''When the user enters the name of a title and submits, the row is deleted from the db.'''
     movie_deleted = deleted_movie_entry.get()
     cur.execute("DELETE FROM movie WHERE title=(?)", (movie_deleted,))
 
+# GUI.
 root = tk.Tk()
 root.title("Movie Input Form")
 
