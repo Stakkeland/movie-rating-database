@@ -38,6 +38,7 @@ def delete_column(event=None):
     '''When the user enters the name of a title and submits, the row is deleted from the db.'''
     movie_deleted = deleted_movie_entry.get()
     cur.execute("DELETE FROM movie WHERE title=(?)", (movie_deleted,))
+    con.commit()
 
 # GUI.
 root = tk.Tk()
