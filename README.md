@@ -1,6 +1,6 @@
 # Overview
 
-This project is a database scoring program. Users can enter a movie, year, and rating to be entered into the database. The user can also view all rows in the database. 
+This project is a database scoring program. Users can enter a movie, year, and rating to be entered into the database. The user can also view all rows in the database, use a score to see rows that have a score higher than given score. Also the user can delete a row by giving the movie title.
 
 The purpose is to learn database connection to a program.
 
