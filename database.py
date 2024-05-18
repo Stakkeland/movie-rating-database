@@ -1,6 +1,13 @@
 import tkinter as tk
 import sqlite3 as sql
 
+'''
+    This program is a movie rating database. It uses sqlite3 and contains
+    the following: 
+    1 table -> movie
+    3 rows -> title, year, score
+'''
+
 # Connects to db.
 con = sql.connect("movie_ratings.db")
 cur = con.cursor()
@@ -34,7 +41,7 @@ def view_db():
     '''When view button is pressed, the console displays the db info in a neat format'''
     rating = db_search_entry.get()
 
-    if rating == "":
+    if rating == "": # If empty entry box.
         for row in cur.execute("SELECT * FROM movie"):
             print(f"{row[0]} | {row[1]} | {row[2]}")
     else:
@@ -51,12 +58,14 @@ def delete_column(event=None):
 root = tk.Tk()
 root.title("Movie Input Form")
 
+# Words.
 tk.Label(root, text="Movie Name:").grid(row=1, column=0)
 tk.Label(root, text="Movie Year:").grid(row=2, column=0)
 tk.Label(root, text="Rating (1-10):").grid(row=3, column=0)
 tk.Label(root, text="Empty = all | score = all > score: ").grid(row=1, column=2)
 tk.Label(root, text="Movie title to remove from database: ").grid(row=3, column=2)
 
+# Entry boxes.
 name_entry = tk.Entry(root)
 year_entry = tk.Entry(root)
 rating_entry = tk.Entry(root)
@@ -69,6 +78,7 @@ rating_entry.grid(row=3, column=1)
 deleted_movie_entry.grid(row=3, column=3)
 db_search_entry.grid(row=1, column=3)
 
+# Buttons.
 submit_button = tk.Button(root, text="Submit", command=submit_action)
 submit_button.grid(row=4, column=1)
 
